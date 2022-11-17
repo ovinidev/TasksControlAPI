@@ -23,7 +23,7 @@ model User {
 
 model Task {
   id          String   @id @default(cuid())
-  nome        String
+  name        String
   description String
   hours       Int
   createdAt   DateTime @default(now())

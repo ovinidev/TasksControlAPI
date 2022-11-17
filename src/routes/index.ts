@@ -1,7 +1,6 @@
-import { Request, Response, Router } from "express";
+import { Router } from 'express';
+import { userRouter } from './user.routes';
 
 export const routes = Router();
 
-routes.get("/", (req: Request, res: Response) => {
-  return res.status(200).json({ message: "Hello World!" });
-});
+routes.use('/users', userRouter);
