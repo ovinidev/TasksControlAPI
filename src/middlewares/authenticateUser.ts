@@ -36,7 +36,7 @@ export async function authenticateUser(
     };
 
     return next();
-  } catch {
-    console.log('oi');
+  } catch (err: any) {
+    return res.status(401).json({ message: err.message });
   }
 }

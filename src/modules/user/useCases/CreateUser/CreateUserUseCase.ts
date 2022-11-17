@@ -6,7 +6,7 @@ import { hash } from 'bcrypt';
 export class CreateUserUseCase {
   constructor(private userRepository: IUserRepository) {}
 
-  async execute({ email, name, password }: ICreateUserDTO) {
+  async execute({ email, name, password, avatarUrl }: ICreateUserDTO) {
     const userAlreadyExists = await this.userRepository.findByEmail(email);
 
     if (userAlreadyExists) {
@@ -15,6 +15,11 @@ export class CreateUserUseCase {
 
     const hashPassword = await hash(password, 8);
 
-    await this.userRepository.create({ email, name, password: hashPassword });
+    await this.userRepository.create({
+      email,
+      name,
+      password: hashPassword,
+      avatarUrl,
+    });
   }
 }

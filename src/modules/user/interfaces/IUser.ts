@@ -2,13 +2,14 @@ export interface ICreateUserDTO {
   name: string;
   email: string;
   password: string;
+  avatarUrl?: string;
 }
 
 export interface IUpdateUserDTO {
-  name: string;
-  email: string;
-  password: string;
-  avatar?: string;
+  name?: string;
+  email?: string;
+  password?: string;
+  avatarUrl?: string;
 }
 
 export interface ILoginUserDTO {
@@ -30,5 +31,5 @@ export interface IUser {
   email: string;
   password: string;
   createdAt: Date;
-  avatar?: string;
+  avatarUrl: string | null;
 }

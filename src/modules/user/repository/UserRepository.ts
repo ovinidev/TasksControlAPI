@@ -3,12 +3,18 @@ import { ICreateUserDTO, IUpdateUserDTO, IUser } from '../interfaces/IUser';
 import { IUserRepository } from './IUserRepository';
 
 export class UserRepository implements IUserRepository {
-  async create({ email, name, password }: ICreateUserDTO): Promise<void> {
+  async create({
+    email,
+    name,
+    password,
+    avatarUrl,
+  }: ICreateUserDTO): Promise<void> {
     await prisma.user.create({
       data: {
         name,
         email,
         password,
+        avatarUrl,
       },
     });
   }
@@ -42,6 +48,7 @@ export class UserRepository implements IUserRepository {
         email: data.email,
         name: data.name,
         password: data.password,
+        avatarUrl: data.avatarUrl,
       },
     });
   }

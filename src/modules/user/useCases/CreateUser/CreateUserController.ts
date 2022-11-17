@@ -17,9 +17,16 @@ export class CreateUserController {
           .min(6, { message: 'Password must be at least 6 characters' }),
       });
 
+      const avatarUrl = req.file?.filename;
+
       const { name, email, password } = createUsersBody.parse(req.body);
 
-      await this.createUserUseCase.execute({ name, email, password });
+      await this.createUserUseCase.execute({
+        name,
+        email,
+        password,
+        avatarUrl,
+      });
 
       return res.status(204).json({ message: 'User created' });
     } catch (err: any) {

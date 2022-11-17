@@ -8,20 +8,28 @@ export class UpdateUserController {
   async handle(req: Request, res: Response): Promise<Response> {
     try {
       const { id } = req.params;
+      const avatarUrl = req.file?.filename;
 
       const createUsersBody = z.object({
         name: z
           .string()
-          .min(3, { message: 'Name must be at least 3 characters' }),
-        email: z.string().email({ message: 'Invalid email' }),
+          .min(3, { message: 'Name must be at least 3 characters' })
+          .optional(),
+        email: z.string().email({ message: 'Invalid email' }).optional(),
         password: z
           .string()
-          .min(6, { message: 'Password must be at least 6 characters' }),
+          .min(6, { message: 'Password must be at least 6 characters' })
+          .optional(),
       });
 
       const { name, email, password } = createUsersBody.parse(req.body);
 
-      this.updateUserUseCase.execute(id, { name, email, password });
+      await this.updateUserUseCase.execute(id, {
+        name,
+        email,
+        password,
+        avatarUrl,
+      });
 
       return res.status(200).json({ message: 'User updated' });
     } catch (err: any) {
