@@ -35,7 +35,7 @@ export async function authenticateUser(
       id: id,
     };
 
-    return next();
+    next();
   } catch (err: any) {
     return res.status(401).json({ message: err.message });
   }

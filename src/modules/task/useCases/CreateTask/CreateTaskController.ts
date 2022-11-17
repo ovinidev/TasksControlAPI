@@ -1,5 +1,6 @@
 import { Request, Response } from 'express';
 import { z } from 'zod';
+import { AppError } from '../../../../errors/AppError';
 import { CreateTaskUseCase } from './CreateTaskUseCase';
 
 export class CreateTaskController {
@@ -20,7 +21,7 @@ export class CreateTaskController {
       const { id } = req.user;
 
       if (!id) {
-        throw new Error('User not found');
+        throw new AppError('User not found');
       }
 
       await this.createTaskUseCase.execute({
