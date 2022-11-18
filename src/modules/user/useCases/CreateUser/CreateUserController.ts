@@ -1,6 +1,7 @@
 import { Request, Response } from 'express';
 import { CreateUserUseCase } from './CreateUserUseCase';
 import { z } from 'zod';
+import { AppError } from '../../../../errors/AppError';
 
 export class CreateUserController {
   constructor(private createUserUseCase: CreateUserUseCase) {}
@@ -21,14 +22,14 @@ export class CreateUserController {
 
       const { name, email, password } = createUsersBody.parse(req.body);
 
-      await this.createUserUseCase.execute({
+      const userCreated = await this.createUserUseCase.execute({
         name,
         email,
         password,
         avatarUrl,
       });
 
-      return res.status(204).json({ message: 'User created' });
+      return res.status(204).json({ userCreated });
     } catch (err: any) {
       if (err instanceof z.ZodError) {
         const error = err.issues[0].message;

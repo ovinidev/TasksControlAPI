@@ -8,8 +8,8 @@ export class UserRepository implements IUserRepository {
     name,
     password,
     avatarUrl,
-  }: ICreateUserDTO): Promise<void> {
-    await prisma.user.create({
+  }: ICreateUserDTO): Promise<IUser> {
+    return await prisma.user.create({
       data: {
         name,
         email,
