@@ -20,14 +20,14 @@ export class UpdateTaskController {
 
       const { taskId } = req.params;
 
-      await this.updateTaskUseCase.execute(taskId, {
+      const task = await this.updateTaskUseCase.execute(taskId, {
         name,
         description,
         date: new Date(date).toISOString(),
         hours,
       });
 
-      return res.status(204).json({ message: 'Task updated' });
+      return res.status(204).json({ message: task });
     } catch (err: any) {
       if (err instanceof z.ZodError) {
         const error = err.issues[0].message;

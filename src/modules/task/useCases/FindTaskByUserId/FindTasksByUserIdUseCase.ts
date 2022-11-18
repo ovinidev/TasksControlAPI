@@ -1,7 +1,7 @@
 import { ITask } from '../../interfaces/ITask';
 import { ITaskRepository } from '../../repository/ITaskRepository';
 
-export class FindTasksByUserUseCase {
+export class FindTasksByUserIdUseCase {
   constructor(private taskRepository: ITaskRepository) {}
 
   async execute(

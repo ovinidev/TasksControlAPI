@@ -1,6 +1,6 @@
 import { TaskRepository } from '../../repository/TaskRepository';
 import { FindTaskByTaskIdUseCase } from './FindTaskByTaskIdUseCase';
-import { FindTaskByTaskIdController } from './FindTaskByUserController';
+import { FindTaskByTaskIdController } from './FindTaskByTaskIdController';
 
 export default () => {
   const taskRepository = new TaskRepository();

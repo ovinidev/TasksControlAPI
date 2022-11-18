@@ -33,8 +33,8 @@ export class TaskRepository implements ITaskRepository {
     });
   }
 
-  async update(taskId: string, data: IUpdateTaskDTO): Promise<void> {
-    await prisma.task.update({
+  async update(taskId: string, data: IUpdateTaskDTO): Promise<ITask> {
+    return await prisma.task.update({
       where: {
         id: taskId,
       },

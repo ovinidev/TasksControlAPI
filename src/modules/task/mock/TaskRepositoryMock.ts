@@ -33,8 +33,31 @@ export class TaskRepositoryMock implements ITaskRepository {
     return tasks ? tasks : null;
   }
 
-  async update(taskId: string, data: IUpdateTaskDTO): Promise<void> {
-    console.log('oi');
+  async update(taskId: string, data: IUpdateTaskDTO): Promise<ITask> {
+    let task = this.tasks.find((task) => {
+      return task.id === taskId;
+    }) as ITask;
+
+    const tasks = this.tasks.filter((task) => {
+      return task.id !== taskId;
+    });
+
+    this.tasks = tasks;
+
+    task = {
+      id: task.id,
+      name: data.name ? data.name : task.name,
+      date: data.date ? new Date(data.date) : task.date,
+      description: data.description ? data.description : task.description,
+      hours: data.hours ? data.hours : task.hours,
+      createdAt: task.createdAt,
+      updatedAt: task.updatedAt,
+      userId: task.userId,
+    };
+
+    this.tasks.push(task);
+
+    return task;
   }
 
   async findByTaskId(taskId: string): Promise<ITask | null> {

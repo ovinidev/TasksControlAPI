@@ -5,6 +5,6 @@ export interface ITaskRepository {
   findAll(): Promise<ITask[]>;
   findByUserId(id: string, order?: 'desc' | 'asc'): Promise<ITask[] | null>;
   findByTaskId(id: string): Promise<ITask | null>;
-  update(taskId: string, data: IUpdateTaskDTO): Promise<void>;
+  update(taskId: string, data: IUpdateTaskDTO): Promise<ITask>;
   delete(taskId: string): Promise<void>;
 }
