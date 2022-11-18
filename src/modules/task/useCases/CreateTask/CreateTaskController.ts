@@ -24,7 +24,7 @@ export class CreateTaskController {
         throw new AppError('User not found');
       }
 
-      await this.createTaskUseCase.execute({
+      const taskCreated = await this.createTaskUseCase.execute({
         name,
         description,
         date: new Date(date).toISOString(),
@@ -32,7 +32,7 @@ export class CreateTaskController {
         userId: id,
       });
 
-      return res.status(201).json({ message: 'Task created' });
+      return res.status(201).json({ message: taskCreated });
     } catch (err: any) {
       if (err instanceof z.ZodError) {
         const error = err.issues[0].message;

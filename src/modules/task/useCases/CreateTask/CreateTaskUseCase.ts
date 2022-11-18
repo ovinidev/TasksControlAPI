@@ -5,7 +5,7 @@ export class CreateTaskUseCase {
   constructor(private taskRepository: ITaskRepository) {}
 
   async execute(data: ICreateTaskDTO) {
-    await this.taskRepository.create({
+    return await this.taskRepository.create({
       name: data.name,
       description: data.description,
       hours: data.hours,

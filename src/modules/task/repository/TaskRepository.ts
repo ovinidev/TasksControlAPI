@@ -3,10 +3,8 @@ import { ICreateTaskDTO, ITask, IUpdateTaskDTO } from '../interfaces/ITask';
 import { ITaskRepository } from './ITaskRepository';
 
 export class TaskRepository implements ITaskRepository {
-  async create(data: ICreateTaskDTO): Promise<void> {
-    console.log(data);
-
-    await prisma.task.create({
+  async create(data: ICreateTaskDTO): Promise<ITask> {
+    return await prisma.task.create({
       data: {
         name: data.name,
         description: data.description,
