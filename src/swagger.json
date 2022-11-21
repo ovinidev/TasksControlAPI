@@ -1,0 +1,393 @@
+{
+	"openapi": "3.0.0",
+	"info": {
+		"title": "Rentx Documentation",
+		"description": "This is an API Rent",
+		"version": "1.0.0"
+	},
+	"paths": {
+		"/users": {
+			"post": {
+				"tags": ["User"],
+				"summary": "Create a new user",
+				"description": "Create a new user",
+				"requestBody": {
+					"content": {
+						"application/json": {
+							"schema": {
+								"$ref": "#/definitions/User"
+							}
+						}
+					}
+				},
+				"responses": {
+					"201": {
+						"description": "User created successfully."
+					},
+					"500": {
+						"description": "Category already exists"
+					}
+				}
+			},
+			"patch": {
+				"tags": ["User"],
+				"summary": "Update a user",
+				"description": "Update a user",
+				"requestBody": {
+					"content": {
+						"application/json": {
+							"schema": {
+								"$ref": "#/definitions/User"
+							}
+						}
+					}
+				},
+				"responses": {
+					"201": {
+						"description": "User created successfully."
+					},
+					"500": {
+						"description": "Category already exists"
+					}
+				}
+			},
+			"get": {
+				"tags": ["User"],
+				"summary": "List all users",
+				"description": "List all users",
+				"responses": {
+					"200": {
+						"description": "success",
+						"content": {
+							"application/json": {
+								"schema": {
+									"type": "array",
+									"items": {
+										"type": "object",
+										"properties": {
+											"name": {
+												"type": "string"
+											},
+											"email": {
+												"type": "string"
+											},
+											"password": {
+												"type": "string"
+											},
+											"avatarUrl": {
+												"type": "string"
+											}
+										}
+									}
+								},
+								"example": {
+									"example": [
+										{
+											"name": "Vini",
+											"email": "vini@gmail.com",
+											"password": "123456",
+											"baseUrl": "2121212131231231avatar.png"
+										}
+									]
+								}
+							}
+						}
+					}
+				}
+			}
+		},
+		"/tasks": {
+			"post": {
+				"tags": ["Task"],
+				"summary": "Create a new task",
+				"requestBody": {
+					"content": {
+						"application/json": {
+							"schema": {
+								"$ref": "#/definitions/Task"
+							}
+						}
+					}
+				},
+				"responses": {
+					"201": {
+						"description": "Task Created"
+					}
+				}
+			},
+			"get": {
+				"tags": ["Task"],
+				"summary": "List all tasks",
+				"description": "List all tasks of all users",
+				"parameters": [
+					{
+						"order": "string"
+					}
+				],
+				"responses": {
+					"200": {
+						"description": "success",
+						"content": {
+							"application/json": {
+								"schema": {
+									"type": "array",
+									"items": {
+										"type": "object",
+										"properties": {
+											"name": {
+												"type": "string"
+											},
+											"description": {
+												"type": "string"
+											},
+											"hours": {
+												"type": "number"
+											},
+											"date": {
+												"type": "string"
+											},
+											"userId": {
+												"type": "string"
+											},
+											"id": {
+												"type": "string"
+											},
+											"createdAt": {
+												"type": "string"
+											},
+											"updatedAt": {
+												"type": "string"
+											}
+										}
+									}
+								},
+								"example": {
+									"example": [
+										{
+											"id": "clal7n48b0001q7qkdmtpbeat",
+											"name": "task",
+											"description": "task description",
+											"hours": 5,
+											"date": "2022-11-17T14:58:59.000Z",
+											"createdAt": "2022-11-17T15:11:34.955Z",
+											"updatedAt": "2022-11-17T15:11:34.955Z",
+											"userId": "clal29uwq0000q79jrybjcz76"
+										}
+									]
+								}
+							}
+						}
+					}
+				}
+			}
+		},
+		"/tasks/me": {
+			"get": {
+				"tags": ["Task"],
+				"summary": "List user tasks",
+				"description": "List user logged tasks",
+				"parameters": [
+					{
+						"order": "string"
+					}
+				],
+				"responses": {
+					"200": {
+						"description": "success",
+						"content": {
+							"application/json": {
+								"schema": {
+									"type": "array",
+									"items": {
+										"type": "object",
+										"properties": {
+											"name": {
+												"type": "string"
+											},
+											"description": {
+												"type": "string"
+											},
+											"hours": {
+												"type": "number"
+											},
+											"date": {
+												"type": "string"
+											},
+											"userId": {
+												"type": "string"
+											},
+											"id": {
+												"type": "string"
+											},
+											"createdAt": {
+												"type": "string"
+											},
+											"updatedAt": {
+												"type": "string"
+											}
+										}
+									}
+								},
+								"example": {
+									"example": [
+										{
+											"id": "clal7n48b0001q7qkdmtpbeat",
+											"name": "task",
+											"description": "task description",
+											"hours": 5,
+											"date": "2022-11-17T14:58:59.000Z",
+											"createdAt": "2022-11-17T15:11:34.955Z",
+											"updatedAt": "2022-11-17T15:11:34.955Z",
+											"userId": "clal29uwq0000q79jrybjcz76"
+										}
+									]
+								}
+							}
+						}
+					}
+				}
+			}
+		},
+		"/tasks/me/:taskId": {
+			"get": {
+				"tags": ["Task"],
+				"summary": "Find task by task id",
+				"description": "List task by task id",
+				"parameters": [
+					{
+						"order": "string"
+					}
+				],
+				"responses": {
+					"200": {
+						"description": "success",
+						"content": {
+							"application/json": {
+								"schema": {
+									"type": "object",
+									"items": {
+										"type": "object",
+										"properties": {
+											"name": {
+												"type": "string"
+											},
+											"description": {
+												"type": "string"
+											},
+											"hours": {
+												"type": "number"
+											},
+											"date": {
+												"type": "string"
+											},
+											"userId": {
+												"type": "string"
+											},
+											"id": {
+												"type": "string"
+											},
+											"createdAt": {
+												"type": "string"
+											},
+											"updatedAt": {
+												"type": "string"
+											}
+										}
+									}
+								},
+								"example": {
+									"example": {
+										"id": "clal7n48b0001q7qkdmtpbeat",
+										"name": "task",
+										"description": "task description",
+										"hours": 5,
+										"date": "2022-11-17T14:58:59.000Z",
+										"createdAt": "2022-11-17T15:11:34.955Z",
+										"updatedAt": "2022-11-17T15:11:34.955Z",
+										"userId": "clal29uwq0000q79jrybjcz76"
+									}
+								}
+							}
+						}
+					}
+				}
+			},
+			"patch": {
+				"tags": ["Task"],
+				"summary": "Update a task",
+				"requestBody": {
+					"content": {
+						"application/json": {
+							"schema": {
+								"$ref": "#/definitions/Task"
+							}
+						}
+					}
+				},
+				"responses": {
+					"201": {
+						"description": "Task Created"
+					}
+				}
+			},
+			"delete": {
+				"tags": ["Task"],
+				"summary": "Delete a user task",
+				"parameters": [
+					{
+						"userId": "2313213124124124124"
+					}
+				],
+				"responses": {
+					"201": {
+						"description": "Task has been deleted"
+					}
+				}
+			}
+		}
+	},
+	"definitions": {
+		"User": {
+			"type": "object",
+			"properties": {
+				"name": {
+					"type": "string"
+				},
+				"email": {
+					"type": "string"
+				},
+				"password": {
+					"type": "string"
+				}
+			},
+			"example": {
+				"name": "Vini",
+				"email": "vini@gmail.com",
+				"password": "123456"
+			}
+		},
+		"Task": {
+			"type": "object",
+			"properties": {
+				"name": {
+					"type": "string"
+				},
+				"description": {
+					"type": "string"
+				},
+				"date": {
+					"type": "string"
+				},
+				"hours": {
+					"type": "number"
+				}
+			},
+			"example": {
+				"name": "Task 1",
+				"description": "Your task description",
+				"date": "Thu Nov 17 2022 11:58:59 GMT-0300 (Brasilia Standard Time)",
+				"hours": 5
+			}
+		}
+	}
+}

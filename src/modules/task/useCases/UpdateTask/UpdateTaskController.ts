@@ -7,16 +7,14 @@ export class UpdateTaskController {
 
   async handle(req: Request, res: Response): Promise<Response> {
     try {
-      const createUsersBody = z.object({
+      const updateTaskBody = z.object({
         name: z.string(),
         description: z.string(),
         date: z.string(),
         hours: z.number().min(1),
       });
 
-      const { name, description, date, hours } = createUsersBody.parse(
-        req.body,
-      );
+      const { name, description, date, hours } = updateTaskBody.parse(req.body);
 
       const { taskId } = req.params;
 

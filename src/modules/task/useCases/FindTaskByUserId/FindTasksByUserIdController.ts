@@ -7,12 +7,9 @@ export class FindTasksByUserIdController {
   async handle(req: Request, res: Response): Promise<Response> {
     try {
       const { id } = req.user;
-      const { order } = req.query;
+      const { order }: any = req.query;
 
-      const tasks = await this.findTasksByUserIdUseCase.execute(
-        id,
-        order as any,
-      );
+      const tasks = await this.findTasksByUserIdUseCase.execute(id, order);
 
       return res.status(200).json({ tasks });
     } catch (err: any) {

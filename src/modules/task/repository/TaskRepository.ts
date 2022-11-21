@@ -20,15 +20,23 @@ export class TaskRepository implements ITaskRepository {
   }
 
   async findByUserId(
-    id: string,
+    userId: string,
     order?: 'asc' | 'desc',
   ): Promise<ITask[] | null> {
     return await prisma.task.findMany({
       where: {
-        userId: id,
+        userId: userId,
       },
       orderBy: {
         updatedAt: order,
+      },
+    });
+  }
+
+  async findByTaskId(taskId: string): Promise<ITask | null> {
+    return await prisma.task.findUnique({
+      where: {
+        id: taskId,
       },
     });
   }
@@ -44,14 +52,6 @@ export class TaskRepository implements ITaskRepository {
         hours: data.hours,
         date: data.date,
         userId: data.userId,
-      },
-    });
-  }
-
-  async findByTaskId(taskId: string): Promise<ITask | null> {
-    return await prisma.task.findUnique({
-      where: {
-        id: taskId,
       },
     });
   }

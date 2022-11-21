@@ -1,14 +1,13 @@
 import { Request, Response } from 'express';
 import { CreateUserUseCase } from './CreateUserUseCase';
 import { z } from 'zod';
-import { AppError } from '../../../../errors/AppError';
 
 export class CreateUserController {
   constructor(private createUserUseCase: CreateUserUseCase) {}
 
   async handle(req: Request, res: Response): Promise<Response> {
     try {
-      const createUsersBody = z.object({
+      const createUserBody = z.object({
         name: z
           .string()
           .min(3, { message: 'Name must be at least 3 characters' }),
@@ -20,16 +19,16 @@ export class CreateUserController {
 
       const avatarUrl = req.file?.filename;
 
-      const { name, email, password } = createUsersBody.parse(req.body);
+      const { name, email, password } = createUserBody.parse(req.body);
 
-      const userCreated = await this.createUserUseCase.execute({
+      await this.createUserUseCase.execute({
         name,
         email,
         password,
         avatarUrl,
       });
 
-      return res.status(204).json({ userCreated });
+      return res.status(204).json({ message: 'User created successfully.' });
     } catch (err: any) {
       if (err instanceof z.ZodError) {
         const error = err.issues[0].message;

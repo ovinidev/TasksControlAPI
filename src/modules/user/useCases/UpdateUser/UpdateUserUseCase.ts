@@ -5,6 +5,6 @@ export class UpdateUserUseCase {
   constructor(private userRepository: IUserRepository) {}
 
   async execute(id: string, data: IUpdateUserDTO): Promise<void> {
-    await this.userRepository.update(id, data);
+    return await this.userRepository.update(id, data);
   }
 }

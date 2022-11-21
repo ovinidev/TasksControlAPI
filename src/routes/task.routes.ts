@@ -12,27 +12,27 @@ import findTaskByTaskIdController from '../modules/task/useCases/FindTaskByTaskI
 export const taskRoutes = Router();
 
 taskRoutes.get('/', async (req, res) => {
-  return findAllTasksController().handle(req, res);
+	return findAllTasksController().handle(req, res);
 });
 
 taskRoutes.use(authenticateUser);
 
 taskRoutes.post('/', async (req, res) => {
-  return createTaskController().handle(req, res);
+	return createTaskController().handle(req, res);
 });
 
 taskRoutes.get('/me', async (req, res) => {
-  return findTaskByUserIdController().handle(req, res);
+	return findTaskByUserIdController().handle(req, res);
 });
 
 taskRoutes.get('/me/:taskId', verifyUserOwnerOfTask, async (req, res) => {
-  return findTaskByTaskIdController().handle(req, res);
+	return findTaskByTaskIdController().handle(req, res);
 });
 
 taskRoutes.patch('/me/:taskId', verifyUserOwnerOfTask, async (req, res) => {
-  return updateTaskController().handle(req, res);
+	return updateTaskController().handle(req, res);
 });
 
 taskRoutes.delete('/me/:taskId', verifyUserOwnerOfTask, (req, res) => {
-  return deleteTaskController().handle(req, res);
+	return deleteTaskController().handle(req, res);
 });

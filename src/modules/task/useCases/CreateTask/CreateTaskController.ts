@@ -8,16 +8,14 @@ export class CreateTaskController {
 
   async handle(req: Request, res: Response): Promise<Response> {
     try {
-      const createUsersBody = z.object({
+      const createTaskBody = z.object({
         name: z.string(),
         description: z.string(),
         date: z.string(),
         hours: z.number().min(1),
       });
 
-      const { name, description, date, hours } = createUsersBody.parse(
-        req.body,
-      );
+      const { name, description, date, hours } = createTaskBody.parse(req.body);
       const { id } = req.user;
 
       if (!id) {
