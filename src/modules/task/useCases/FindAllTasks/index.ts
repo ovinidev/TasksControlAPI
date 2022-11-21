@@ -1,15 +1,13 @@
 import { TaskRepository } from '../../repository/TaskRepository';
-import { FindAllTasksController } from './FindAllTasksController';
-import { FindAllTasksUseCase } from './FindAllTasksUseCase';
+import { FindAllTaskController } from './FindAllTaskController';
+import { FindAllTaskUseCase } from './FindAllTaskUseCase';
 
 export default () => {
-  const taskRepository = new TaskRepository();
+	const taskRepository = new TaskRepository();
 
-  const findAllTasksUseCase = new FindAllTasksUseCase(taskRepository);
+	const findAllTasksUseCase = new FindAllTaskUseCase(taskRepository);
 
-  const findAllTasksController = new FindAllTasksController(
-    findAllTasksUseCase,
-  );
+	const findAllTasksController = new FindAllTaskController(findAllTasksUseCase);
 
-  return findAllTasksController;
+	return findAllTasksController;
 };
