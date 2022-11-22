@@ -7,7 +7,7 @@ export class UpdateUserController {
 
 	async handle(req: Request, res: Response): Promise<Response> {
 		try {
-			const { id } = req.params;
+			const { id } = req.userId;
 			const avatarUrl = req.file?.filename;
 
 			const updateUserBody = z.object({

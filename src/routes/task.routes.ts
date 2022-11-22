@@ -1,6 +1,5 @@
 import { Router } from 'express';
-import { verifyUserOwnerOfTask } from '../middlewares/verifyUserOwnerOfTask';
-import { authenticateUser } from '../middlewares/authenticateUser';
+import { authenticateUser } from '../modules/user/middlewares/authenticateUser';
 
 import createTaskController from '../modules/task/useCases/CreateTask';
 import findTaskByUserIdController from '../modules/task/useCases/FindTaskByUserId';
@@ -8,6 +7,8 @@ import updateTaskController from '../modules/task/useCases/UpdateTask';
 import deleteTaskController from '../modules/task/useCases/DeleteTask';
 import findAllTasksController from '../modules/task/useCases/FindAllTasks';
 import findTaskByTaskIdController from '../modules/task/useCases/FindTaskByTaskId';
+import { verifyUserOwnerOfTask } from '../modules/task/middlewares/verifyUserOwnerOfTask';
+import { verifyTaskBodyIsValid } from '../modules/task/middlewares/verifyTaskBodyIsValid';
 
 export const taskRoutes = Router();
 
@@ -17,7 +18,7 @@ taskRoutes.get('/', async (req, res) => {
 
 taskRoutes.use(authenticateUser);
 
-taskRoutes.post('/', async (req, res) => {
+taskRoutes.post('/', verifyTaskBodyIsValid, async (req, res) => {
 	return createTaskController().handle(req, res);
 });
 
