@@ -1,39 +1,51 @@
+import 'reflect-metadata';
 import { AppError } from '../../../../errors/AppError';
 import { ILoginUserDTO, IUserResponse } from '../../interfaces/IUser';
 import { IUserRepository } from '../../repository/IUserRepository';
 import { compare } from 'bcrypt';
 import { sign } from 'jsonwebtoken';
 import { SECRET_KEY } from '../../../../constants/secretKey';
+import { inject, injectable } from 'tsyringe';
 
+@injectable()
 export class LoginUserUseCase {
-  constructor(private userRepository: IUserRepository) {}
+	constructor(
+		@inject('UserRepository')
+		private userRepository: IUserRepository,
+	) {}
 
-  async execute({ email, password }: ILoginUserDTO): Promise<IUserResponse> {
-    const user = await this.userRepository.findByEmail(email);
+	async execute({ email, password }: ILoginUserDTO): Promise<IUserResponse> {
+		const user = await this.userRepository.findByEmail(email);
 
-    if (!user) {
-      throw new AppError('email or password incorrect', 401);
-    }
+		if (!user) {
+			throw new AppError('email or password incorrect', 401);
+		}
 
-    const passwordMatch = await compare(password, user.password);
+		const passwordMatch = await compare(password, user.password);
 
-    if (!passwordMatch) {
-      throw new AppError('email or password incorrect', 401);
-    }
+		if (!passwordMatch) {
+			throw new AppError('email or password incorrect', 401);
+		}
 
-    const token = sign({}, SECRET_KEY, {
-      subject: user.id,
-      expiresIn: '1d',
-    });
+		const token = sign({}, SECRET_KEY, {
+			subject: user.id,
+			expiresIn: '1d',
+		});
 
-    const response = {
-      token,
-      user: {
-        name: user.name,
-        email: user.email,
-      },
-    };
+		const refreshToken = sign({}, SECRET_KEY, {
+			subject: user.id,
+			expiresIn: '35s',
+		});
 
-    return response;
-  }
+		const response = {
+			token,
+			refreshToken,
+			user: {
+				name: user.name,
+				email: user.email,
+			},
+		};
+
+		return response;
+	}
 }

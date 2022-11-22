@@ -21,18 +21,18 @@ export async function authenticateUser(
 
 		const [, token] = authHeader.split(' ');
 
-		const { sub: userId } = verify(token, SECRET_KEY) as ITokenVerified;
+		const { sub: id } = verify(token, SECRET_KEY) as ITokenVerified;
 
 		const userRepository = new UserRepository();
 
-		const userAlreadyExists = await userRepository.findById(userId);
+		const userAlreadyExists = await userRepository.findById(id);
 
 		if (!userAlreadyExists) {
 			return res.status(401).json({ message: 'User does not exists' });
 		}
 
-		req.userId = {
-			id: userId,
+		req.user = {
+			id: id,
 		};
 
 		next();

@@ -1,10 +1,16 @@
-import { IUpdateUserDTO } from '../../interfaces/IUser';
+import 'reflect-metadata';
+import { injectable, inject } from 'tsyringe';
+import { IUpdateUserDTO, IUser } from '../../interfaces/IUser';
 import { IUserRepository } from '../../repository/IUserRepository';
 
+@injectable()
 export class UpdateUserUseCase {
-	constructor(private userRepository: IUserRepository) {}
+	constructor(
+		@inject('UserRepository')
+		private userRepository: IUserRepository,
+	) {}
 
-	async execute(id: string, data: IUpdateUserDTO): Promise<void> {
+	async execute(id: string, data: IUpdateUserDTO): Promise<IUser> {
 		if (data.email) {
 			const emailAlreadyExist = await this.userRepository.findByEmail(
 				data.email,

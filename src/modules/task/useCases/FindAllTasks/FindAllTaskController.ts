@@ -1,12 +1,12 @@
 import { Request, Response } from 'express';
+import { container } from 'tsyringe';
 import { FindAllTaskUseCase } from './FindAllTaskUseCase';
 
 export class FindAllTaskController {
-	constructor(private findTasksByUserUseCase: FindAllTaskUseCase) {}
-
 	async handle(req: Request, res: Response): Promise<Response> {
 		try {
-			const tasks = await this.findTasksByUserUseCase.execute();
+			const findTasksByUserUseCase = container.resolve(FindAllTaskUseCase);
+			const tasks = await findTasksByUserUseCase.execute();
 
 			return res.status(200).json({ tasks });
 		} catch (err: any) {

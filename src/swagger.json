@@ -181,7 +181,7 @@
 				}
 			}
 		},
-		"/tasks/me": {
+		"/tasks": {
 			"get": {
 				"tags": ["Task"],
 				"summary": "List user tasks",
@@ -248,7 +248,7 @@
 				}
 			}
 		},
-		"/tasks/me/:taskId": {
+		"/tasks/:taskId": {
 			"get": {
 				"tags": ["Task"],
 				"summary": "Find task by task id",
@@ -375,6 +375,7 @@
 					"201": {
 						"description": {
 							"token": "your token",
+							"refreshToken": "your refresh token",
 							"user": {
 								"name": "your name",
 								"email": "your email"

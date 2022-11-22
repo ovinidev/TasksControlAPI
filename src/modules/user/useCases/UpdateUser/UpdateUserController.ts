@@ -1,13 +1,13 @@
 import { Request, Response } from 'express';
+import { container } from 'tsyringe';
 import { z } from 'zod';
 import { UpdateUserUseCase } from './UpdateUserUseCase';
 
 export class UpdateUserController {
-	constructor(private updateUserUseCase: UpdateUserUseCase) {}
-
 	async handle(req: Request, res: Response): Promise<Response> {
 		try {
-			const { id } = req.userId;
+			const updateUserUseCase = container.resolve(UpdateUserUseCase);
+			const { id } = req.user;
 			const avatarUrl = req.file?.filename;
 
 			const updateUserBody = z.object({
@@ -24,7 +24,7 @@ export class UpdateUserController {
 
 			const { name, email, password } = updateUserBody.parse(req.body);
 
-			await this.updateUserUseCase.execute(id, {
+			await updateUserUseCase.execute(id, {
 				name,
 				email,
 				password,

@@ -1,16 +1,16 @@
 /* eslint-disable prefer-const */
 import { TaskRepositoryMock } from '../../mock/TaskRepositoryMock';
 import { CreateTaskUseCase } from '../CreateTask/CreateTaskUseCase';
-import { FindAllTasksUseCase } from './FindAllTaskUseCase';
+import { FindAllTaskUseCase } from './FindAllTaskUseCase';
 
 let taskRepositoryMock: TaskRepositoryMock;
-let findAllTaskUseCase: FindAllTasksUseCase;
+let findAllTaskUseCase: FindAllTaskUseCase;
 let createTaskUseCase: CreateTaskUseCase;
 
 describe('Create task', () => {
 	beforeEach(() => {
 		taskRepositoryMock = new TaskRepositoryMock();
-		findAllTaskUseCase = new FindAllTasksUseCase(taskRepositoryMock);
+		findAllTaskUseCase = new FindAllTaskUseCase(taskRepositoryMock);
 		createTaskUseCase = new CreateTaskUseCase(taskRepositoryMock);
 	});
 

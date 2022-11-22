@@ -9,32 +9,34 @@ let updateUserUseCase: UpdateUserUseCase;
 let createUserUseCase: CreateUserUseCase;
 
 describe('Create task', () => {
-  beforeEach(() => {
-    taskRepositoryMock = new UserRepositoryMock();
-    updateUserUseCase = new UpdateUserUseCase(taskRepositoryMock);
-    createUserUseCase = new CreateUserUseCase(taskRepositoryMock);
-  });
+	beforeEach(() => {
+		taskRepositoryMock = new UserRepositoryMock();
+		updateUserUseCase = new UpdateUserUseCase(taskRepositoryMock);
+		createUserUseCase = new CreateUserUseCase(taskRepositoryMock);
+	});
 
-  it('Should be able to update a user', async () => {
-    const user = {
-      name: 'John Doe',
-      email: 'johndoe@gmail.com',
-      password: '123456',
-    } as ICreateUserDTO;
+	it('Should be able to update a user', async () => {
+		const user = {
+			name: 'John Doe',
+			email: 'johndoe@gmail.com',
+			password: '123456',
+		} as ICreateUserDTO;
 
-    const userCreated = await createUserUseCase.execute(user);
+		const userCreated = await createUserUseCase.execute(user);
 
-    const userForUpdate = {
-      id: userCreated.id,
-      name: 'John Doe Updated',
-      email: userCreated.email,
-    };
+		const userForUpdate = {
+			id: userCreated.id,
+			name: 'John Doe Updated',
+		};
 
-    const userUpdated = await updateUserUseCase.execute(
-      userForUpdate.id,
-      userForUpdate,
-    );
+		const userUpdated = await updateUserUseCase.execute(
+			userForUpdate.id,
+			userForUpdate,
+		);
 
-    expect(userUpdated).not.toEqual(userCreated);
-  });
+		console.log('userUpdated', userUpdated);
+		console.log('userCreated', userCreated);
+
+		expect(userUpdated).not.toEqual(userCreated);
+	});
 });

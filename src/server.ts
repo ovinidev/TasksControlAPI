@@ -1,5 +1,7 @@
+import 'reflect-metadata';
 import express, { json } from 'express';
 import { routes } from './routes';
+import './shared/container';
 import path from 'node:path';
 import swagger from 'swagger-ui-express';
 import swaggerFile from './swagger.json';
