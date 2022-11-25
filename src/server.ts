@@ -5,8 +5,11 @@ import './shared/container';
 import path from 'node:path';
 import swagger from 'swagger-ui-express';
 import swaggerFile from './swagger.json';
+import cors from 'cors';
 
 const app = express();
+
+app.use(cors());
 
 app.use('/uploads', express.static(path.resolve(__dirname, '..', 'uploads')));
 

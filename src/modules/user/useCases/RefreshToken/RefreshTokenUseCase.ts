@@ -21,12 +21,17 @@ export class RefreshTokenUseCase {
 				SECRET_KEY,
 			) as IRefreshTokenVerified;
 
-			const newToken = sign({}, SECRET_KEY, {
+			const token = sign({}, SECRET_KEY, {
 				subject: id,
 				expiresIn: '1d',
 			});
 
-			return newToken;
+			const newRefreshToken = sign({}, SECRET_KEY, {
+				subject: id,
+				expiresIn: '7d',
+			});
+
+			return { token, refreshToken: newRefreshToken };
 		} catch (err: any) {
 			throw new Error(err.message);
 		}

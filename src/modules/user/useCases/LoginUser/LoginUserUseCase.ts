@@ -34,7 +34,7 @@ export class LoginUserUseCase {
 
 		const refreshToken = sign({}, SECRET_KEY, {
 			subject: user.id,
-			expiresIn: '35s',
+			expiresIn: '7d',
 		});
 
 		const response = {
@@ -43,6 +43,7 @@ export class LoginUserUseCase {
 			user: {
 				name: user.name,
 				email: user.email,
+				avatarUrl: user.avatarUrl,
 			},
 		};
 

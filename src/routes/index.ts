@@ -13,4 +13,4 @@ const loginUserController = new LoginUserController();
 routes.post('/login', loginUserController.handle);
 
 const refreshTokenController = new RefreshTokenController();
-routes.post('/refresh-token', refreshTokenController.handle);
+routes.get('/refresh-token', refreshTokenController.handle);

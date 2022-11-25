@@ -15,9 +15,11 @@ export class RefreshTokenController {
 
 			const [, refresh_token] = authHeader.split(' ');
 
-			const token = await refreshTokenUseCase.execute(refresh_token);
+			const { token, refreshToken } = await refreshTokenUseCase.execute(
+				refresh_token,
+			);
 
-			return res.status(200).json({ token });
+			return res.status(200).json({ token, refreshToken: refreshToken });
 		} catch (err: any) {
 			return res.status(401).json({ message: err.message });
 		}

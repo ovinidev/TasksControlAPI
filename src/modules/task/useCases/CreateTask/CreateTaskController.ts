@@ -23,7 +23,7 @@ export class CreateTaskController {
 			const taskCreated = await createTaskUseCase.execute({
 				name,
 				description,
-				date: new Date(date).toISOString(),
+				date: new Date(date),
 				hours,
 				userId: id,
 			});
