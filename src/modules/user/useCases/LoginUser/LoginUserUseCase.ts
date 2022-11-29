@@ -29,7 +29,7 @@ export class LoginUserUseCase {
 
 		const token = sign({}, SECRET_KEY, {
 			subject: user.id,
-			expiresIn: '1d',
+			expiresIn: '1h',
 		});
 
 		const refreshToken = sign({}, SECRET_KEY, {

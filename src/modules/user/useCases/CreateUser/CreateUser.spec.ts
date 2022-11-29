@@ -7,7 +7,7 @@ import { CreateUserUseCase } from './CreateUserUseCase';
 let taskRepositoryMock: UserRepositoryMock;
 let createUserUseCase: CreateUserUseCase;
 
-describe('Create task', () => {
+describe('Create user', () => {
 	beforeEach(() => {
 		taskRepositoryMock = new UserRepositoryMock();
 		createUserUseCase = new CreateUserUseCase(taskRepositoryMock);

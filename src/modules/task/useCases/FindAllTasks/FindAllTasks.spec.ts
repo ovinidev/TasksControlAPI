@@ -7,7 +7,7 @@ let taskRepositoryMock: TaskRepositoryMock;
 let findAllTaskUseCase: FindAllTaskUseCase;
 let createTaskUseCase: CreateTaskUseCase;
 
-describe('Create task', () => {
+describe('Find all tasks', () => {
 	beforeEach(() => {
 		taskRepositoryMock = new TaskRepositoryMock();
 		findAllTaskUseCase = new FindAllTaskUseCase(taskRepositoryMock);

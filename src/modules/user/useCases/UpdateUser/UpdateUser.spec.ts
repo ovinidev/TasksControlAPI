@@ -8,7 +8,7 @@ let taskRepositoryMock: UserRepositoryMock;
 let updateUserUseCase: UpdateUserUseCase;
 let createUserUseCase: CreateUserUseCase;
 
-describe('Create task', () => {
+describe('Update user', () => {
 	beforeEach(() => {
 		taskRepositoryMock = new UserRepositoryMock();
 		updateUserUseCase = new UpdateUserUseCase(taskRepositoryMock);
@@ -33,9 +33,6 @@ describe('Create task', () => {
 			userForUpdate.id,
 			userForUpdate,
 		);
-
-		console.log('userUpdated', userUpdated);
-		console.log('userCreated', userCreated);
 
 		expect(userUpdated).not.toEqual(userCreated);
 	});

@@ -1,19 +1,11 @@
 import { sign, verify } from 'jsonwebtoken';
-import { inject, injectable } from 'tsyringe';
 import { SECRET_KEY } from '../../../../constants/secretKey';
-import { IUserRepository } from '../../repository/IUserRepository';
 
 interface IRefreshTokenVerified {
 	sub: string;
 }
 
-@injectable()
 export class RefreshTokenUseCase {
-	constructor(
-		@inject('UserRepository')
-		private userRepository: IUserRepository,
-	) {}
-
 	async execute(refreshToken: string) {
 		try {
 			const { sub: id } = verify(
@@ -23,7 +15,7 @@ export class RefreshTokenUseCase {
 
 			const token = sign({}, SECRET_KEY, {
 				subject: id,
-				expiresIn: '1d',
+				expiresIn: '1h',
 			});
 
 			const newRefreshToken = sign({}, SECRET_KEY, {

@@ -7,7 +7,7 @@ let taskRepositoryMock: TaskRepositoryMock;
 let findTasksByUserIdUseCase: FindTaskByUserIdUseCase;
 let createTaskUseCase: CreateTaskUseCase;
 
-describe('Create task', () => {
+describe('Find0 task by user id', () => {
 	beforeEach(() => {
 		taskRepositoryMock = new TaskRepositoryMock();
 		findTasksByUserIdUseCase = new FindTaskByUserIdUseCase(taskRepositoryMock);
