@@ -26,51 +26,51 @@ describe('Create user', () => {
 	});
 
 	it('Should not be able to create a new user with email existing', async () => {
-		expect(async () => {
-			const user = {
-				name: 'John Doe',
-				email: 'johndoe@gmail.com',
-				password: '123456',
-			} as ICreateUserDTO;
+		const user = {
+			name: 'John Doe',
+			email: 'johndoe@gmail.com',
+			password: '123456',
+		} as ICreateUserDTO;
 
+		expect(async () => {
 			await createUserUseCase.execute(user);
 			await createUserUseCase.execute(user);
-		}).rejects.toBeInstanceOf(AppError);
+		}).rejects.toThrow(AppError);
 	});
 
 	it('Should not be able to create a new user with email invalid', async () => {
-		expect(async () => {
-			const user = {
-				name: 'John Doe',
-				email: 'johndoeedasdas',
-				password: '123456',
-			} as ICreateUserDTO;
+		const user = {
+			name: 'John Doe',
+			email: 'johndoeedasdas',
+			password: '123456',
+		} as ICreateUserDTO;
 
+		expect(async () => {
 			await createUserUseCase.execute(user);
-		}).rejects.toBeInstanceOf(Error);
+		}).rejects.toThrow(Error);
 	});
 
 	it('Should not be able to create a new user with password invalid', async () => {
-		expect(async () => {
-			const user = {
-				name: 'John Doe',
-				email: 'johndoe@gmail.com',
-				password: '22',
-			} as ICreateUserDTO;
+		const user = {
+			name: 'John Doe',
+			email: 'johndoe@gmail.com',
+			password: '22',
+		} as ICreateUserDTO;
 
+		expect(async () => {
 			await createUserUseCase.execute(user);
-		}).rejects.toBeInstanceOf(Error);
+		}).rejects.toThrow(Error);
 	});
 
 	it('Should not be able to create a new user with name invalid', async () => {
-		expect(async () => {
-			const user = {
-				name: 'a',
-				email: 'johndoe@gmail.com',
-				password: '123456',
-			} as ICreateUserDTO;
+		const user = {
+			name: 'a',
+			email: 'johndoe@gmail.com',
+			password: '123456',
+		} as ICreateUserDTO;
 
+		expect(async () => {
 			await createUserUseCase.execute(user);
-		}).rejects.toBeInstanceOf(Error);
+		}).rejects.toThrow(Error);
 	});
 });
